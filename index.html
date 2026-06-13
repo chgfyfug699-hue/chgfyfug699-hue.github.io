@@ -232,13 +232,13 @@
       document.getElementById('adminActions').style.setProperty('display', 'flex', 'important');
     }
 
-    // مود Cars Add-on ثابت للجميع
+    // مود Cars Add-on محدث بالرابط الجديد
     const permanentMods = [
       {
         name: "Cars Add-on",
         desc: "أسطول سيارات احترافي لعالم ماينكرافت بدروك.",
         image: "https://i.postimg.cc/nzd3pzyz/image-1.jpg",
-        download: "https://pixeldrain.com/u/fyT8W5zW",
+        download: "https://devuploads.com/3o8sd678hhcr",
         youtube: "#"
       }
     ];
@@ -246,7 +246,6 @@
     const saved = localStorage.getItem('baybars_mods');
     const localMods = saved ? JSON.parse(saved) : [];
     
-    // دمج المود الثابت مع أي مودات إضافية
     allMods = [...permanentMods, ...localMods];
     renderMods();
   }
@@ -300,7 +299,7 @@
   }
 
   function openUpload() { document.getElementById('uploadModal').classList.add('open'); }
-  function closeUpload() { document.getElementById('uploadModal').classList.close('open'); } // تم تعديلها لتكون close
+  function closeUpload() { document.getElementById('uploadModal').classList.remove('open'); }
 
   function clearAllMods() {
     if(confirm('هل تريد مسح القائمة كاملة؟')) {
