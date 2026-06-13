@@ -4,70 +4,50 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Baybars – Minecraft Bedrock</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --bg-deep: #0d0f1a; --bg-card: #13162a; --accent: #6c63ff; --text-pri: #e8e9ed; --text-sec: #9b9ca6; --border: #1f2240; --red: #ef4444; }
-  body { font-family:'Inter',sans-serif; background:var(--bg-deep); color:var(--text-pri); }
-  header { background:#090b15; padding: 15px; text-align: center; border-bottom: 1px solid var(--border); }
-  .logo { font-size: 24px; font-weight: 800; color: var(--accent); }
-  .main { max-width: 800px; margin: 20px auto; padding: 20px; }
-  .mod-card { background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:16px; display:flex; gap:16px; margin-bottom:12px; align-items: center; }
-  .mod-thumb { width:75px; height:75px; border-radius:8px; overflow:hidden; }
-  .mod-thumb img { width:100%; height:100%; object-fit:cover; }
-  .mod-info { flex:1; }
-  .mod-name { font-weight:700; margin-bottom:4px; }
-  .mod-desc { font-size:12px; color:var(--text-sec); }
-  .dl-btn { background:var(--accent); color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-size:12px; }
-  .admin-only { display: none; }
+  :root { --bg-deep: #0d0f1a; --bg-card: #13162a; --accent: #6c63ff; --text-pri: #e8e9ed; --text-sec: #9b9ca6; --border: #1f2240; --radius: 8px; }
+  body { font-family: sans-serif; background: var(--bg-deep); color: var(--text-pri); margin: 0; padding: 20px; }
+  .container { max-width: 800px; margin: 0 auto; }
+  .mod-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; display: flex; gap: 16px; margin-bottom: 12px; align-items: center; }
+  .mod-thumb { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background: #1a1e35; }
+  .mod-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .mod-info { flex: 1; }
+  .mod-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .mod-desc { font-size: 13px; color: var(--text-sec); }
+  .dl-btn { background: var(--accent); color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 600; }
+  .admin-only { display: none; margin-bottom: 20px; text-align: center; }
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">Baybars</div>
-</header>
-
-<div class="main">
+<div class="container">
   <div id="adminActions" class="admin-only">
-    <button onclick="alert('هذا الجزء مخصص للإضافة')" style="background:var(--accent); color:white; border:none; padding:10px; border-radius:5px;">إضافة مود جديد (أدمن)</button>
+    <button style="background:var(--red); color:white; border:none; padding:10px 20px; border-radius:5px;">لوحة تحكم الأدمن</button>
   </div>
-  
-  <div id="modList">
-    </div>
+  <div id="modList"></div>
 </div>
 
 <script>
-  // ده مكان المودات اللي هتظهر للناس دايماً
+  // أضف موداتك هنا - ستظهر للجميع دائمًا
   const myMods = [
-    {
-      name: "Action and stuff",
-      desc: "أقوى مود واقعية في ماينكرافت",
-      image: "https://i.imgur.com/example.png", 
-      download: "https://mediafire.com/..."
-    }
+    { name: "Action and stuff", desc: "أقوى مود واقعية في ماينكرافت", image: "https://i.imgur.com/example.png", download: "#" }
   ];
 
-  function render() {
-    const list = document.getElementById('modList');
-    list.innerHTML = myMods.map(m => `
-      <div class="mod-card">
-        <div class="mod-thumb"><img src="${m.image}" onerror="this.src='https://via.placeholder.com/75'"/></div>
-        <div class="mod-info">
-          <div class="mod-name">${m.name}</div>
-          <div class="mod-desc">${m.desc}</div>
-        </div>
-        <a href="${m.download}" class="dl-btn" target="_blank">Download</a>
+  const list = document.getElementById('modList');
+  list.innerHTML = myMods.map(m => `
+    <div class="mod-card">
+      <div class="mod-thumb"><img src="${m.image}" onerror="this.src='https://via.placeholder.com/80'"/></div>
+      <div class="mod-info">
+        <div class="mod-name">${m.name}</div>
+        <div class="mod-desc">${m.desc}</div>
       </div>
-    `).join('');
+      <a href="${m.download}" class="dl-btn">Download</a>
+    </div>
+  `).join('');
 
-    // إظهار أزرار الأدمن لو الرابط فيه كلمة السر
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('admin') === 'baybars123') {
-      document.getElementById('adminActions').style.display = 'block';
-    }
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('admin') === 'baybars123') {
+    document.getElementById('adminActions').style.display = 'block';
   }
-  render();
 </script>
 </body>
 </html>
