@@ -28,13 +28,16 @@
   .cat-pill { cursor:pointer; background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:5px 12px; font-size:12px; color:var(--text-sec); }
   .cat-pill.active { border-color:var(--accent); color:var(--accent); background:var(--accent-glow); }
   .main { max-width:1280px; margin:0 auto; padding:20px 24px; }
-  .mod-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; display:flex; gap:16px; margin-bottom:12px; align-items: center; }
-  .mod-thumb { width:75px; height:75px; border-radius:8px; background:var(--bg-card2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; }
+  
+  /* التنسيق الموحد لكل المودات لتصبح عريضة وكبيرة */
+  .mod-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; display:flex; gap:16px; margin-bottom:12px; flex-direction: column; align-items: flex-start; }
+  .mod-thumb { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); background:var(--bg-card2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; }
   .mod-thumb img { width:100%; height:100%; object-fit:cover; }
-  .mod-info { flex:1; }
-  .mod-name { font-size:15px; font-weight:700; color:#fff; }
+  
+  .mod-info { flex:1; width: 100%; }
+  .mod-name { font-size:15px; font-weight:700; color:#fff; margin-top: 4px; }
   .mod-cat { font-size:11px; color:var(--accent); margin-top:4px; }
-  .dl-btn { background:var(--accent); color:#fff; font-size:12px; font-weight:600; padding:8px 16px; border-radius:6px; text-decoration:none; }
+  .dl-btn { background:var(--accent); color:#fff; font-size:12px; font-weight:600; padding:8px 16px; border-radius:6px; text-decoration:none; text-align: center; margin-top: 8px; width: auto; }
   .admin-only { display: none !important; }
   .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:500; align-items:center; justify-content:center; padding:16px; }
   .modal-overlay.open { display:flex; }
@@ -81,27 +84,27 @@
 
 <script>
   let allMods = [
-    { name: "Realism Visuals", category: "Shaders", image: "https://i.postimg.cc/x8jQST4k/image-1.jpg", download: "https://devuploads.com/x2st7pbd05u7" },
-    { name: "Dark Fantasy Visuals 2.0", category: "Shaders", image: "https://i.postimg.cc/PfbNsCPj/image-1.jpg", download: "https://devuploads.com/gy7yzn0rkf6s" },
-    { name: "Chroma Visuals", category: "Shaders", image: "https://i.postimg.cc/Gmxj4L78/image-1.jpg", download: "https://devuploads.com/9ay9rhh5kg0z" },
-    { name: "Luminous Dreams v1.0", category: "Shaders", image: "https://i.postimg.cc/MpScf1Nm/image-1.jpg", download: "https://devuploads.com/xicyagzp9rp8" },
-    { name: "Animals", category: "Skins", image: "https://i.postimg.cc/kG0bpKBz/image-1.jpg", download: "https://devuploads.com/61dk02yxdrbt" },
-    { name: "Ultimate Onesies", category: "Skins", image: "https://i.postimg.cc/7Lwg43X1/image-1.jpg", download: "https://devuploads.com/y745kmnmdibu" },
-    { name: "Modern Roleplay", category: "Skins", image: "https://i.postimg.cc/2577LcVC/image-1.jpg", download: "https://devuploads.com/cuulj8gqfffq" },
-    { name: "Aura Entities", category: "Skins", image: "https://i.postimg.cc/Kz5pFcnW/image-1(Copy).jpg", download: "https://devuploads.com/cfrbslez87tb" },
-    { name: "Anomaly Colors", category: "Skins", image: "https://i.postimg.cc/0Qg1rNKq/image-1.jpg", download: "https://devuploads.com/a99fk0nz0xed" },
-    { name: "Tubbo's RealmSMP RPG", category: "Skins", image: "https://i.postimg.cc/pLXWtyzh/image-1.jpg", download: "https://devuploads.com/b0am4vmbix7r" },
-    { name: "Deep Divers", category: "Skins", image: "https://i.postimg.cc/43xmwBW7/image-1.jpg", download: "https://devuploads.com/hoc33a0dcf4e" },
-    { name: "Neon Reapers", category: "Skins", image: "https://i.postimg.cc/Cxj1w9Q5/image-1.jpg", download: "https://devuploads.com/why2zdo3fdmw" },
-    { name: "Copper Samurai", category: "Skins", image: "https://i.postimg.cc/G2PJYMtr/image-1.jpg", download: "https://devuploads.com/mcs4yojsrsg9" },
-    { name: "OCEAN BIOMES Add-On", category: "Addons", image: "https://i.postimg.cc/7Z63v20h/image-1.jpg", download: "https://devuploads.com/4tpb40ydg0f0" },
-    { name: "Visuals Refined", category: "Shaders", image: "https://i.postimg.cc/XvPy613x/image-1.jpg", download: "https://devuploads.com/oze6t1fam9bt" },
-    { name: "RED MOON MONSTERS", category: "Skins", image: "https://i.postimg.cc/QCypCYkg/image-1.jpg", download: "https://devuploads.com/frtnoqy0zeiq" },
-    { name: "Eternal Caves Add-On", category: "Addons", image: "https://i.postimg.cc/QtdYwP67/image-1.jpg", download: "https://devuploads.com/oldg5evj58co" },
-    { name: "Wilderness Add-On", category: "Addons", image: "https://i.postimg.cc/L6X896WK/image-1.jpg", download: "https://devuploads.com/m5vm25h5zcws" },
-    { name: "How to Train Your Dragon", category: "Addons", image: "https://i.postimg.cc/9FmQskJ1/image-1.jpg", download: "https://devuploads.com/thtqgragoh98" },
-    { name: "Action and Stuff 1.10.1", category: "Addons", image: "https://i.postimg.cc/fb9HZB8W/image-1.jpg", download: "https://devuploads.com/pz2d8kqofk8f" },
-    { name: "Cars Add-on", category: "Addons", image: "https://i.postimg.cc/nzd3pzyz/image-1.jpg", download: "https://devuploads.com/3o8sd678hhcr" }
+    { name: "Realism Visuals", category: "Shaders", image: "https://i.postimg.cc/wBgnM5Jv/IMG-20260614-141106-849.jpg", download: "https://devuploads.com/x2st7pbd05u7" },
+    { name: "Dark Fantasy Visuals 2.0", category: "Shaders", image: "https://i.postimg.cc/brnsrjcb/image-1.jpg", download: "https://devuploads.com/gy7yzn0rkf6s" },
+    { name: "Chroma Visuals", category: "Shaders", image: "https://i.postimg.cc/3RPsKsFs/IMG-20260614-141556-979.jpg", download: "https://devuploads.com/9ay9rhh5kg0z" },
+    { name: "Luminous Dreams v1.0", category: "Shaders", image: "https://i.postimg.cc/LsJQny5B/IMG-20260614-095723-525.jpg", download: "https://devuploads.com/xicyagzp9rp8" },
+    { name: "Animals", category: "Skins", image: "https://i.postimg.cc/jjGT5nxr/IMG-20260614-143526-954.jpg", download: "https://devuploads.com/61dk02yxdrbt" },
+    { name: "Ultimate Onesies", category: "Skins", image: "https://i.postimg.cc/mDfxRxjz/IMG-20260614-143717-389.jpg", download: "https://devuploads.com/y745kmnmdibu" },
+    { name: "Modern Roleplay", category: "Skins", image: "https://i.postimg.cc/QCfnFvQm/IMG-20260614-143903-474.jpg", download: "https://devuploads.com/cuulj8gqfffq" },
+    { name: "Aura Entities", category: "Skins", image: "https://i.postimg.cc/NFCpsmt8/IMG-20260614-144040-650.jpg", download: "https://devuploads.com/cfrbslez87tb" },
+    { name: "Anomaly Colors", category: "Skins", image: "https://i.postimg.cc/MKcY0cxL/IMG-20260614-144229-573.jpg", download: "https://devuploads.com/a99fk0nz0xed" },
+    { name: "Tubbo's RealmSMP RPG", category: "Skins", image: "https://i.postimg.cc/9Mn7zp4W/IMG-20260614-144342-726.jpg", download: "https://devuploads.com/b0am4vmbix7r" },
+    { name: "Deep Divers", category: "Skins", image: "https://i.postimg.cc/nLV2D3LD/IMG-20260614-144500-250.jpg", download: "https://devuploads.com/hoc33a0dcf4e" },
+    { name: "Neon Reapers", category: "Skins", image: "https://i.postimg.cc/TYrJNzL5/IMG-20260614-144622-263.jpg", download: "https://devuploads.com/why2zdo3fdmw" },
+    { name: "Copper Samurai", category: "Skins", image: "https://i.postimg.cc/qMX2x2Wf/IMG-20260614-144744-949.jpg", download: "https://devuploads.com/mcs4yojsrsg9" },
+    { name: "OCEAN BIOMES Add-On", category: "Addons", image: "https://i.postimg.cc/nhrM97JD/IMG-20260614-144856-800.jpg", download: "https://devuploads.com/4tpb40ydg0f0" },
+    { name: "تحسينات بصرية", category: "Shaders", image: "https://i.postimg.cc/hGKPndtC/image-1(Copy).jpg", download: "https://devuploads.com/oze6t1fam9bt" },
+    { name: "RED MOON MONSTERS", category: "Skins", image: "https://i.postimg.cc/NffjZTLH/IMG-20260614-145008-311.jpg", download: "https://devuploads.com/frtnoqy0zeiq" },
+    { name: "Eternal Caves Add-On", category: "Addons", image: "https://i.postimg.cc/Gt3bww33/IMG-20260614-145121-945.jpg", download: "https://devuploads.com/oldg5evj58co" },
+    { name: "Wilderness Add-On", category: "Addons", image: "https://i.postimg.cc/kG5PYQwy/IMG-20260614-145237-082.jpg", download: "https://devuploads.com/m5vm25h5zcws" },
+    { name: "How to Train Your Dragon", category: "Addons", image: "https://i.postimg.cc/xdjYhV6R/image-1.jpg", download: "https://devuploads.com/thtqgragoh98" },
+    { name: "Action and Stuff 1.10.1", category: "Addons", image: "https://i.postimg.cc/brmwVNPj/image-1.jpg", download: "https://devuploads.com/pz2d8kqofk8f" },
+    { name: "Cars Add-on", category: "Addons", image: "https://i.postimg.cc/1zZh1hMj/IMG-20260614-145339-275.jpg", download: "https://devuploads.com/3o8sd678hhcr" }
   ];
 
   function filterMods(cat, el) {
@@ -109,16 +112,18 @@
     el.classList.add('active');
     const listEl = document.getElementById('modList');
     const filtered = cat === 'All' ? allMods : allMods.filter(m => m.category === cat);
-    listEl.innerHTML = filtered.map(m => `
-      <div class="mod-card">
-        <div class="mod-thumb"><img src="${m.image}" onerror="this.parentElement.innerHTML='🧩'"></div>
-        <div class="mod-info">
-          <div class="mod-name">${m.name}</div>
-          <div class="mod-cat">${m.category}</div>
+    listEl.innerHTML = filtered.map(m => {
+      return `
+        <div class="mod-card">
+          <div class="mod-thumb"><img src="${m.image}" onerror="this.parentElement.innerHTML='🧩'"></div>
+          <div class="mod-info">
+            <div class="mod-name">${m.name}</div>
+            <div class="mod-cat">${m.category}</div>
+          </div>
+          <a href="${m.download}" class="dl-btn" target="_blank">Download</a>
         </div>
-        <a href="${m.download}" class="dl-btn" target="_blank">Download</a>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   function openUpload() { document.getElementById('uploadModal').classList.add('open'); }
