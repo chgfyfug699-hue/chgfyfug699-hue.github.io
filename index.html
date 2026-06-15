@@ -54,9 +54,8 @@
 </header>
 
 <div class="cats">
-  <div class="cat-pill active" onclick="filterMods('All', this)">🧩 All</div>
-  <div class="cat-pill" onclick="filterMods('Addons', this)">⚙️ Addons</div>
-  <div class="cat-pill" onclick="filterMods('Textures', this)">🎨 Texture Packs</div>
+  <div class="cat-pill active" onclick="filterMods('All', this)">🧩 الكل</div>
+  <div class="cat-pill" onclick="filterMods('Addons', this)">⚙️ مودات</div>
   <div class="cat-pill" onclick="filterMods('Versions', this)">🚀 إصدارات ماينكرافت</div>
   <div class="cat-pill" onclick="filterMods('Skins', this)">👤 السكنات</div>
   <div class="cat-pill" onclick="filterMods('Shaders', this)">✨ الشادرات</div>
@@ -69,8 +68,7 @@
 <div class="modal-overlay" id="uploadModal">
   <div class="modal">
     <select id="modCat" style="width:100%;padding:10px;background:var(--bg-deep);color:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:10px;">
-      <option value="Addons">Addons</option>
-      <option value="Textures">Texture Packs</option>
+      <option value="Addons">مودات</option>
       <option value="Versions">إصدارات ماينكرافت</option>
       <option value="Skins">السكنات</option>
       <option value="Shaders">الشادرات</option>
@@ -84,6 +82,10 @@
 
 <script>
   let allMods = [
+    { name: "TNT Add-On", category: "Addons", image: "https://i.postimg.cc/bNhKxVTp/image-1.jpg", download: "https://devuploads.com/r3izshi4k6pa" },
+    { name: "Police Add-On", category: "Addons", image: "https://i.postimg.cc/gcSYNWn1/image-1.jpg", download: "https://devuploads.com/9phdzn8czkbp" },
+    { name: "Armor Expansion Add-On", category: "Addons", image: "https://i.postimg.cc/Nf5nYhpc/image-1.jpg", download: "https://devuploads.com/hackjh6s4k81" },
+    { name: "Gaming Furniture Add-On", category: "Addons", image: "https://i.postimg.cc/LXLWcjTf/image-1.jpg", download: "https://devuploads.com/ej76cuyin3w6" },
     { name: "Realism Visuals", category: "Shaders", image: "https://i.postimg.cc/wBgnM5Jv/IMG-20260614-141106-849.jpg", download: "https://devuploads.com/x2st7pbd05u7" },
     { name: "Dark Fantasy Visuals 2.0", category: "Shaders", image: "https://i.postimg.cc/brnsrjcb/image-1.jpg", download: "https://devuploads.com/gy7yzn0rkf6s" },
     { name: "Chroma Visuals", category: "Shaders", image: "https://i.postimg.cc/3RPsKsFs/IMG-20260614-141556-979.jpg", download: "https://devuploads.com/9ay9rhh5kg0z" },
@@ -113,12 +115,18 @@
     const listEl = document.getElementById('modList');
     const filtered = cat === 'All' ? allMods : allMods.filter(m => m.category === cat);
     listEl.innerHTML = filtered.map(m => {
+      let displayCat = m.category;
+      if (m.category === 'Addons') displayCat = 'مودات';
+      if (m.category === 'Versions') displayCat = 'إصدارات ماينكرافت';
+      if (m.category === 'Skins') displayCat = 'السكنات';
+      if (m.category === 'Shaders') displayCat = 'الشادرات';
+      
       return `
         <div class="mod-card">
           <div class="mod-thumb"><img src="${m.image}" onerror="this.parentElement.innerHTML='🧩'"></div>
           <div class="mod-info">
             <div class="mod-name">${m.name}</div>
-            <div class="mod-cat">${m.category}</div>
+            <div class="mod-cat">${displayCat}</div>
           </div>
           <a href="${m.download}" class="dl-btn" target="_blank">Download</a>
         </div>
