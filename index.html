@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -29,7 +29,6 @@
   .cat-pill.active { border-color:var(--accent); color:var(--accent); background:var(--accent-glow); }
   .main { max-width:1280px; margin:0 auto; padding:20px 24px; }
   
-  /* التنسيق الموحد لكل المودات لتصبح عريضة وكبيرة */
   .mod-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; display:flex; gap:16px; margin-bottom:12px; flex-direction: column; align-items: flex-start; }
   .mod-thumb { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); background:var(--bg-card2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; }
   .mod-thumb img { width:100%; height:100%; object-fit:cover; }
@@ -49,7 +48,7 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="#">Baybars</a>
-    <nav style="margin-left:auto;"><a class="admin-only" id="navUploadBtn" onclick="openUpload()" style="cursor:pointer;color:var(--accent)">Upload</a></nav>
+    <nav style="margin-right:auto;"><a class="admin-only" id="navUploadBtn" onclick="openUpload()" style="cursor:pointer;color:var(--accent)">Upload</a></nav>
   </div>
 </header>
 
@@ -82,6 +81,50 @@
 
 <script>
   let allMods = [
+    { name: "PARASITE OUTBREAK Add-On 1.0.3", category: "Addons", image: "https://i.postimg.cc/Y0WtCNT3/image-1.jpg", download: "https://devuploads.com/oxpkb5nk162i" },
+    { name: "Secret Doors", category: "Addons", image: "https://i.postimg.cc/RhyqPZxf/image-1.jpg", download: "https://devuploads.com/hin7gxug4b7i" },
+    { name: "Animations+ Add-On", category: "Addons", image: "https://i.postimg.cc/GpFYHGn2/image-1.jpg", download: "https://devuploads.com/sj608njgakx0" },
+    { name: "MUTANTS! Add-On 2.0", category: "Addons", image: "https://i.postimg.cc/13LcgygG/image-1.jpg", download: "https://devuploads.com/at088pj35byc" },
+    { name: "The One Who Watches Add-On 1.0.1", category: "Addons", image: "https://i.postimg.cc/sf9ntGB3/image-1.jpg", download: "https://devuploads.com/yk4k9cuu0qzq" },
+    { name: "Mowzie’s Mobs Add-On 1.1", category: "Addons", image: "https://i.postimg.cc/CxM9vHJ9/image-1.jpg", download: "https://devuploads.com/1ojei5ppv1eq" },
+    { name: "Sonic Add-On", category: "Addons", image: "https://i.postimg.cc/qvkHPdBc/image-1.jpg", download: "https://devuploads.com/bawhhhu0vitc" },
+    { name: "Huggy & Friends Add-On", category: "Addons", image: "https://i.postimg.cc/44DJFMhM/image-1.jpg", download: "https://devuploads.com/hnogawm9a1f1" },
+    { name: "CAVE DWELLER Add-On (Official)", category: "Addons", image: "https://i.postimg.cc/76R3SDhZ/image-1.jpg", download: "https://devuploads.com/hay1k970xhlf" },
+    { name: "Security Add-On", category: "Addons", image: "https://i.postimg.cc/SRKPxm59/image-1.jpg", download: "https://devuploads.com/bjeyil3sye5h" },
+    { name: "Naturalist Add-On 26.1", category: "Addons", image: "https://i.postimg.cc/ryJcymd4/image-1.jpg", download: "https://devuploads.com/gf3sy54tsbd3" },
+    { name: "Dark Keepers", category: "Skins", image: "https://i.postimg.cc/dVc7M3g1/image-1.jpg", download: "https://devuploads.com/rn94j8gny7f1" },
+    { name: "Cozy Animals", category: "Skins", image: "https://i.postimg.cc/nhmv76f4/image-1.jpg", download: "https://devuploads.com/gu6fmlz2gu6a" },
+    { name: "Dark Pink", category: "Skins", image: "https://i.postimg.cc/gJ79Cwtp/image-1.jpg", download: "https://devuploads.com/dsgkfug9wan3" },
+    { name: "Anime Idols 6", category: "Skins", image: "https://i.postimg.cc/cHL0yGsc/image-1.jpg", download: "https://devuploads.com/v8wxp89tpdml" },
+    { name: "Spy Mobs", category: "Skins", image: "https://i.postimg.cc/CKVx22Bx/image-1.jpg", download: "https://devuploads.com/4z4fcawxmt08" },
+    { name: "Black x Gold", category: "Skins", image: "https://i.postimg.cc/sXrGpX4d/image-1.jpg", download: "https://devuploads.com/2fb10pf3i86k" },
+    { name: "Cute Mob Skins", category: "Skins", image: "https://i.postimg.cc/4dVbgqwM/image-1.jpg", download: "https://devuploads.com/5uywrhtq8qnt" },
+    { name: "Aphmau Vampires and Werewolves", category: "Skins", image: "https://i.postimg.cc/GmLMjLzQ/image-1.jpg", download: "https://devuploads.com/6me66mxfyqt8" },
+    { name: "ENTITY 303", category: "Skins", image: "https://i.postimg.cc/9Qdxd4GH/image-1.jpg", download: "https://devuploads.com/i0t5k1e6azud" },
+    { name: "Weather Friends", category: "Skins", image: "https://i.postimg.cc/SKLwxTZC/image-1.jpg", download: "https://devuploads.com/s9sw0g05za48" },
+    { name: "minecraft-26-30", category: "Versions", image: "https://i.postimg.cc/WpmhPT6F/1781860824096.png", download: "https://devuploads.com/0uosmi0yv1mo" },
+    { name: "Levels Matter - Stats + Skills Add-On 1.0", category: "Addons", image: "https://i.postimg.cc/T3Fs08sL/image-1.jpg", download: "https://devuploads.com/ns9rfgzng5dx" },
+    { name: "Mythics & Magic!", category: "Addons", image: "https://i.postimg.cc/qvvrSdQx/image-1.jpg", download: "https://devuploads.com/8iwx35cvh5kf" },
+    { name: "Combat Classes", category: "Addons", image: "https://i.postimg.cc/W444GkQb/image-1.jpg", download: "https://devuploads.com/2jntnr6ydehg" },
+    { name: "Dungeon Crawler Add-On", category: "Addons", image: "https://i.postimg.cc/438mq5z8/image-1.jpg", download: "https://devuploads.com/lxa97qhhhbq8" },
+    { name: "BLOCK FURNITURE Add-On", category: "Addons", image: "https://i.postimg.cc/43p90tWt/image-1.jpg", download: "https://devuploads.com/2qm6d8lwhm52" },
+    { name: "Harder on Bedrock Add-On", category: "Addons", image: "https://i.postimg.cc/P5PbSCGz/image-1.jpg", download: "https://devuploads.com/b4y44xwl03vj" },
+    { name: "Deluxe Furniture Add-On", category: "Addons", image: "https://i.postimg.cc/bNq39YwP/image-1.jpg", download: "https://devuploads.com/lln33ivkwnwp" },
+    { name: "Block Pack Add-On", category: "Addons", image: "https://i.postimg.cc/8cRXPjkX/image-1.jpg", download: "https://devuploads.com/qjvvhbdi2fbf" },
+    { name: "UTILITIES Add-On", category: "Addons", image: "https://i.postimg.cc/Xq5SKjjc/image-1.jpg", download: "https://devuploads.com/2pd0ywkosmxt" },
+    { name: "DNA Add-On", category: "Addons", image: "https://i.postimg.cc/4y7FCBjg/image-1.jpg", download: "https://devuploads.com/95zcngsvojjv" },
+    { name: "Mob Companions Add-On 1.0", category: "Addons", image: "https://i.postimg.cc/4d8rRKdf/image-1.jpg", download: "https://devuploads.com/zt4azpvx1anp" },
+    { name: "Red Horns", category: "Skins", image: "https://i.postimg.cc/KvY8TLBz/image-1.jpg", download: "https://devuploads.com/8ckpdsusxk89" },
+    { name: "Glarity", category: "Skins", image: "https://i.postimg.cc/hPK75fmN/image-1.jpg", download: "https://devuploads.com/ds08wsiupcji" },
+    { name: "Ducks in Pyjamas", category: "Skins", image: "https://i.postimg.cc/x8vMbmz1/image-1.jpg", download: "https://devuploads.com/1vmgr6ei0y69" },
+    { name: "THE DARKNESS", category: "Skins", image: "https://i.postimg.cc/7YSmgG4v/image-1.jpg", download: "https://devuploads.com/1b5p94wi4lpw" },
+    { name: "MONSTERS", category: "Skins", image: "https://i.postimg.cc/66gmVxGx/image-1.jpg", download: "https://devuploads.com/cuzelreprtoq" },
+    { name: "End Forged", category: "Skins", image: "https://i.postimg.cc/cCgYXYYK/image-1.jpg", download: "https://devuploads.com/uy58e60lxb6v" },
+    { name: "Street Craft", category: "Skins", image: "https://i.postimg.cc/MTzdPsKW/image-1.jpg", download: "https://devuploads.com/3zi5g73182y1" },
+    { name: "Banana Teens HD", category: "Skins", image: "https://i.postimg.cc/rpxPY014/image-1.jpg", download: "https://devuploads.com/0ox27x4jv395" },
+    { name: "Fruity Buddies", category: "Skins", image: "https://i.postimg.cc/526cp2Kg/image-1.jpg", download: "https://devuploads.com/skewj1rkdiw4" },
+    { name: "Ultimate Emo", category: "Skins", image: "https://i.postimg.cc/rwFyTTnH/image-1.jpg", download: "https://devuploads.com/sf2rkdrvaq5x" },
+    { name: "Vanilla Reforged", category: "Shaders", image: "https://i.postimg.cc/WbdXJMBS/hqdefault.jpg", download: "https://devuploads.com/slio6yoqcy4d" },
     { name: "TNT Add-On", category: "Addons", image: "https://i.postimg.cc/bNhKxVTp/image-1.jpg", download: "https://devuploads.com/r3izshi4k6pa" },
     { name: "Police Add-On", category: "Addons", image: "https://i.postimg.cc/gcSYNWn1/image-1.jpg", download: "https://devuploads.com/9phdzn8czkbp" },
     { name: "Armor Expansion Add-On", category: "Addons", image: "https://i.postimg.cc/Nf5nYhpc/image-1.jpg", download: "https://devuploads.com/hackjh6s4k81" },
@@ -105,7 +148,7 @@
     { name: "Eternal Caves Add-On", category: "Addons", image: "https://i.postimg.cc/Gt3bww33/IMG-20260614-145121-945.jpg", download: "https://devuploads.com/oldg5evj58co" },
     { name: "Wilderness Add-On", category: "Addons", image: "https://i.postimg.cc/kG5PYQwy/IMG-20260614-145237-082.jpg", download: "https://devuploads.com/m5vm25h5zcws" },
     { name: "How to Train Your Dragon", category: "Addons", image: "https://i.postimg.cc/xdjYhV6R/image-1.jpg", download: "https://devuploads.com/thtqgragoh98" },
-    { name: "Action and Stuff 1.10.1", category: "Addons", image: "https://i.postimg.cc/brmwVNPj/image-1.jpg", download: "https://devuploads.com/pz2d8kqofk8f" },
+    { name: "Action and stuff 1.11", category: "Addons", image: "https://i.postimg.cc/brmwVNPj/image-1.jpg", download: "https://devuploads.com/xg9omp03cwxl" },
     { name: "Cars Add-on", category: "Addons", image: "https://i.postimg.cc/1zZh1hMj/IMG-20260614-145339-275.jpg", download: "https://devuploads.com/3o8sd678hhcr" }
   ];
 
@@ -128,7 +171,7 @@
             <div class="mod-name">${m.name}</div>
             <div class="mod-cat">${displayCat}</div>
           </div>
-          <a href="${m.download}" class="dl-btn" target="_blank">Download</a>
+          <a href="${m.download}" class="dl-btn" target="_blank">تحميل</a>
         </div>
       `;
     }).join('');
