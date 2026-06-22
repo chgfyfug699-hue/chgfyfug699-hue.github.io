@@ -3,92 +3,477 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Baybars – Minecraft Bedrock</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<title>Baybars — متجر إضافات ماينكرافت بيدروك</title>
+<meta name="description" content="تحميل مباشر لإضافات (مودات) وسكنات وشيدرات وإصدارات ماينكرافت بيدروك إيديشن، محدّثة باستمرار." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;700;800&family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
-    --bg-deep:    #0d0f1a;
-    --bg-card:    #13162a;
-    --bg-card2:   #1a1e35;
-    --accent:     #6c63ff;
-    --accent-dim: #4f48cc;
-    --accent-glow:rgba(108,99,255,.18);
-    --text-pri:   #e8e9ed;
-    --text-sec:   #9b9ca6;
-    --text-muted: #4a4b5a;
-    --border:     #1f2240;
-    --radius:     8px;
+    --void:        #0a0c12;
+    --panel:       #12151f;
+    --panel-2:     #181c29;
+    --stone:       #262b3a;
+    --stone-soft:  #1c2030;
+    --ink:         #eef1f6;
+    --ink-dim:     #9aa1b4;
+    --ink-faint:   #5b6175;
+
+    --emerald:     #3ddc84;
+    --emerald-ink: #06140c;
+    --diamond:     #5ec8e8;
+    --diamond-ink: #04181f;
+    --gold:        #f0b429;
+    --gold-ink:    #221703;
+    --amethyst:    #b388ff;
+    --amethyst-ink:#1b0f33;
+
+    --r-sm: 4px;
+    --r-md: 7px;
+    --shadow-hard: 3px 3px 0 rgba(0,0,0,.45);
   }
-  body { font-family:'Inter',sans-serif; background:var(--bg-deep); color:var(--text-pri); min-height:100vh; }
-  header { background:#090b15; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
-  .header-inner { max-width:1280px; margin:0 auto; padding:0 16px; height:60px; display:flex; align-items:center; gap:16px; }
-  .logo { font-size:20px; font-weight:800; color:var(--accent); text-decoration:none; }
-  
-  .search-container { max-width:1280px; margin:20px auto; padding:0 24px; }
-  #searchInput { width:100%; padding:12px; border-radius:8px; border:1px solid var(--border); background:var(--bg-card); color:white; font-size:14px; }
-  
-  .cats { max-width:1280px; margin:0 auto; padding:0 24px 12px 24px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--border); }
-  .cat-pill { cursor:pointer; background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:5px 12px; font-size:12px; color:var(--text-sec); }
-  .cat-pill.active { border-color:var(--accent); color:var(--accent); background:var(--accent-glow); }
-  
-  .main { max-width:1280px; margin:0 auto; padding:20px 24px; }
-  .mod-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; display:flex; gap:16px; margin-bottom:12px; flex-direction: column; align-items: flex-start; }
-  .mod-thumb { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); background:var(--bg-card2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; }
-  .mod-thumb img { width:100%; height:100%; object-fit:cover; }
-  
-  .mod-info { flex:1; width: 100%; }
-  .mod-name { font-size:15px; font-weight:700; color:#fff; margin-top: 4px; }
-  .mod-cat { font-size:11px; color:var(--accent); margin-top:4px; }
-  .dl-btn { background:var(--accent); color:#fff; font-size:12px; font-weight:600; padding:8px 16px; border-radius:6px; text-decoration:none; text-align: center; margin-top: 8px; width: auto; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', 'Inter', sans-serif;
+    background: var(--void);
+    color: var(--ink);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--diamond);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    background: #08090f;
+    border-bottom: 1px solid var(--stone);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .ore-strip {
+    height: 3px;
+    background: linear-gradient(90deg, var(--emerald), var(--diamond), var(--gold), var(--amethyst));
+  }
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 2px solid var(--stone);
+    object-fit: cover;
+    display: block;
+  }
+  .brand-text {
+    font-family: 'Changa', 'Cairo', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: .2px;
+    color: #fff;
+  }
+  .brand-tagline {
+    font-size: 12px;
+    color: var(--ink-faint);
+    border-inline-start: 1px solid var(--stone);
+    padding-inline-start: 12px;
+  }
+  @media (max-width: 560px) { .brand-tagline { display: none; } }
+
+  header nav { margin-inline-start: auto; }
+  #navUploadBtn {
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--emerald);
+    border: 1.5px solid var(--emerald);
+    border-radius: var(--r-sm);
+    padding: 6px 12px;
+  }
   .admin-only { display: none !important; }
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:500; align-items:center; justify-content:center; padding:16px; }
-  .modal-overlay.open { display:flex; }
-  .modal { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; width:100%; max-width:500px; padding:20px; }
+
+  /* ---------- search zone ---------- */
+  .search-zone {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 20px 6px;
+  }
+  .search-box {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .search-box svg {
+    position: absolute;
+    inset-inline-start: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 17px;
+    height: 17px;
+    color: var(--ink-faint);
+    pointer-events: none;
+  }
+  #searchInput {
+    width: 100%;
+    padding: 13px 16px 13px 16px;
+    padding-inline-start: 42px;
+    border-radius: var(--r-md);
+    border: 2px solid var(--stone);
+    background: var(--panel);
+    color: var(--ink);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    box-shadow: var(--shadow-hard);
+    transition: border-color .15s ease;
+  }
+  #searchInput::placeholder { color: var(--ink-faint); }
+  #searchInput:focus { border-color: var(--diamond); }
+
+  .result-count {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-top: 10px;
+  }
+
+  /* ---------- category tabs ---------- */
+  .cats {
+    max-width: 1280px;
+    margin: 14px auto 0;
+    padding: 0 20px 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--stone);
+  }
+  .cats::-webkit-scrollbar { display: none; }
+
+  .cat-pill {
+    flex-shrink: 0;
+    cursor: pointer;
+    background: var(--panel);
+    border: 2px solid var(--stone);
+    border-radius: var(--r-sm);
+    padding: 8px 14px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-dim);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,.35);
+    transition: transform .1s ease, box-shadow .1s ease, color .1s ease, border-color .1s ease, background .1s ease;
+  }
+  .cat-pill:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .cat-pill:active { transform: translate(2px,2px); box-shadow: none; }
+
+  .cat-pill.active[data-cat="All"]      { background: var(--ink);      border-color: var(--ink);      color: var(--void); }
+  .cat-pill.active[data-cat="Addons"]   { background: var(--emerald);  border-color: var(--emerald);  color: var(--emerald-ink); }
+  .cat-pill.active[data-cat="Versions"] { background: var(--diamond);  border-color: var(--diamond);  color: var(--diamond-ink); }
+  .cat-pill.active[data-cat="Skins"]    { background: var(--gold);     border-color: var(--gold);     color: var(--gold-ink); }
+  .cat-pill.active[data-cat="Shaders"]  { background: var(--amethyst); border-color: var(--amethyst); color: var(--amethyst-ink); }
+
+  /* ---------- main grid ---------- */
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 22px 20px 50px;
+  }
+  #modList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+
+  .mod-card {
+    background: var(--panel);
+    border: 2px solid var(--stone);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-hard);
+    animation: rise .4s ease backwards;
+    animation-delay: calc(var(--i, 0) * 16ms);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .mod-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--cat-color, var(--ink-faint));
+    box-shadow: 5px 5px 0 rgba(0,0,0,.5);
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mod-card { animation: none; }
+    * { transition-duration: .01ms !important; }
+  }
+
+  .mod-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--panel-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    overflow: hidden;
+  }
+  .mod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mod-badge {
+    position: absolute;
+    top: 8px;
+    inset-inline-start: 8px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 3px;
+    background: var(--cat-color);
+    color: var(--cat-ink);
+    letter-spacing: .2px;
+  }
+
+  .mod-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex: 1;
+  }
+  .mod-name {
+    font-family: 'Inter', sans-serif;
+    unicode-bidi: plaintext;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+  }
+
+  .dl-btn {
+    margin-top: auto;
+    font-family: 'Cairo', sans-serif;
+    background: var(--emerald);
+    color: var(--emerald-ink);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 14px;
+    border: 2px solid #1c8a52;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,.4);
+    transition: transform .1s ease, box-shadow .1s ease, filter .1s ease;
+  }
+  .dl-btn:hover { filter: brightness(1.08); }
+  .dl-btn:active { transform: translate(2px,2px); box-shadow: none; }
+  .dl-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ---------- empty state ---------- */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ink-faint);
+  }
+  .empty-state .empty-icon { font-size: 34px; margin-bottom: 12px; }
+  .empty-state .empty-title { font-weight: 700; color: var(--ink-dim); font-size: 15px; margin-bottom: 4px; }
+  .empty-state .empty-sub { font-size: 13px; }
+
+  /* ---------- footer ---------- */
+  .site-footer {
+    border-top: 1px solid var(--stone);
+    padding: 22px 20px 30px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  /* ---------- modal ---------- */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,6,10,.78);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--panel);
+    border: 2px solid var(--stone);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 460px;
+    padding: 22px;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.5);
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    inset-inline-end: 14px;
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--ink); }
+  .modal h3 {
+    font-family: 'Changa', sans-serif;
+    font-size: 17px;
+    margin-bottom: 16px;
+    padding-inline-end: 24px;
+  }
+  .modal label {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-dim);
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .modal .field { margin-bottom: 12px; }
+  .modal select, .modal input {
+    width: 100%;
+    padding: 10px;
+    background: var(--void);
+    color: #fff;
+    border: 1.5px solid var(--stone);
+    border-radius: var(--r-sm);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+  }
+  .modal select:focus, .modal input:focus { border-color: var(--diamond); }
+  .modal-submit {
+    width: 100%;
+    padding: 11px;
+    background: var(--emerald);
+    color: var(--emerald-ink);
+    border: 2px solid #1c8a52;
+    border-radius: var(--r-sm);
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 rgba(0,0,0,.4);
+    margin-top: 4px;
+  }
+  .modal-submit:active { transform: translate(2px,2px); box-shadow: none; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <a class="logo" href="#">Baybars</a>
-    <nav style="margin-right:auto;"><a class="admin-only" id="navUploadBtn" onclick="openUpload()" style="cursor:pointer;color:var(--accent)">Upload</a></nav>
+    <a class="brand" href="#">
+      <img class="brand-mark" src="https://i.postimg.cc/gJBtt1Cx/pack-icon.png" alt="Baybars" loading="lazy">
+      <span class="brand-text">Baybars</span>
+    </a>
+    <span class="brand-tagline">متجر إضافات ماينكرافت بيدروك</span>
+    <nav>
+      <a class="admin-only" id="navUploadBtn" onclick="openUpload()" role="button" tabindex="0">+ إضافة جديدة</a>
+    </nav>
   </div>
+  <div class="ore-strip"></div>
 </header>
 
-<div class="search-container">
-  <input type="text" id="searchInput" placeholder="ابحث عن مود أو إصدار..." onkeyup="searchMods()">
+<div class="search-zone">
+  <div class="search-box">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="ابحث عن مود، سكن أو شيدر..." onkeyup="searchMods()" aria-label="بحث">
+  </div>
+  <p class="result-count" id="resultCount"></p>
 </div>
 
-<div class="cats">
-  <div class="cat-pill active" onclick="filterMods('All', this)">🧩 الكل</div>
-  <div class="cat-pill" onclick="filterMods('Addons', this)">⚙️ مودات</div>
-  <div class="cat-pill" onclick="filterMods('Versions', this)">🚀 إصدارات ماينكرافت</div>
-  <div class="cat-pill" onclick="filterMods('Skins', this)">👤 السكنات</div>
-  <div class="cat-pill" onclick="filterMods('Shaders', this)">✨ الشادرات</div>
-</div>
+<nav class="cats" aria-label="التصنيفات">
+  <button class="cat-pill active" data-cat="All" onclick="filterMods('All', this)">🧩 الكل</button>
+  <button class="cat-pill" data-cat="Addons" onclick="filterMods('Addons', this)">⚙️ مودات</button>
+  <button class="cat-pill" data-cat="Versions" onclick="filterMods('Versions', this)">🚀 إصدارات</button>
+  <button class="cat-pill" data-cat="Skins" onclick="filterMods('Skins', this)">👤 سكنات</button>
+  <button class="cat-pill" data-cat="Shaders" onclick="filterMods('Shaders', this)">✨ شادرات</button>
+</nav>
 
 <div class="main">
   <div id="modList"></div>
+  <div class="empty-state" id="emptyState" hidden>
+    <div class="empty-icon">🧱</div>
+    <p class="empty-title">لا توجد نتائج</p>
+    <p class="empty-sub">جرّب كلمة بحث مختلفة أو اختر تصنيفًا آخر</p>
+  </div>
 </div>
+
+<footer class="site-footer">
+  <p>Baybars غير مرتبط رسميًا بشركة Mojang أو Microsoft — جميع الإضافات من مصادر خارجية.</p>
+  <p>© 2026 Baybars</p>
+</footer>
 
 <div class="modal-overlay" id="uploadModal">
   <div class="modal">
-    <select id="modCat" style="width:100%;padding:10px;background:var(--bg-deep);color:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:10px;">
-      <option value="Addons">مودات</option>
-      <option value="Versions">إصدارات ماينكرافت</option>
-      <option value="Skins">السكنات</option>
-      <option value="Shaders">الشادرات</option>
-    </select>
-    <input type="text" id="modName" placeholder="اسم المود/الإصدار" style="width:100%;padding:10px;margin-bottom:10px;background:var(--bg-deep);border:1px solid var(--border);color:#fff;">
-    <input type="text" id="modImg" placeholder="رابط الصورة" style="width:100%;padding:10px;margin-bottom:10px;background:var(--bg-deep);border:1px solid var(--border);color:#fff;">
-    <input type="text" id="modDl" placeholder="رابط التحميل" style="width:100%;padding:10px;margin-bottom:10px;background:var(--bg-deep);border:1px solid var(--border);color:#fff;">
-    <button onclick="submitMod()" style="width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;">نشر</button>
+    <button class="modal-close" onclick="closeUpload()" aria-label="إغلاق">×</button>
+    <h3>إضافة عنصر جديد</h3>
+    <div class="field">
+      <label for="modCat">التصنيف</label>
+      <select id="modCat">
+        <option value="Addons">مودات</option>
+        <option value="Versions">إصدارات ماينكرافت</option>
+        <option value="Skins">السكنات</option>
+        <option value="Shaders">الشادرات</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="modName">الاسم</label>
+      <input type="text" id="modName" placeholder="اسم المود أو الإصدار">
+    </div>
+    <div class="field">
+      <label for="modImg">رابط الصورة</label>
+      <input type="text" id="modImg" placeholder="https://...">
+    </div>
+    <div class="field">
+      <label for="modDl">رابط التحميل</label>
+      <input type="text" id="modDl" placeholder="https://...">
+    </div>
+    <button class="modal-submit" onclick="submitMod()">نشر</button>
   </div>
 </div>
 
 <script>
   let allMods = [
+    { name: "Sharks N Whales", category: "Skins", image: "https://i.postimg.cc/7ZFKzgg0/image-1.jpg", download: "https://link-hub.net/4269460/ncVOaKYZOM1M" },
     { name: "minecraft-26-31", category: "Versions", image: "https://i.postimg.cc/cJLF0SJv/1000309933.png", download: "https://link-center.net/4269460/SUiaJmpg6OvD" },
     { name: "PARASITE OUTBREAK Add-On 1.0.3", category: "Addons", image: "https://i.postimg.cc/Y0WtCNT3/image-1.jpg", download: "https://devuploads.com/oxpkb5nk162i" },
     { name: "Secret Doors", category: "Addons", image: "https://i.postimg.cc/RhyqPZxf/image-1.jpg", download: "https://devuploads.com/hin7gxug4b7i" },
@@ -174,22 +559,37 @@
 
   function renderMods(mods) {
     const listEl = document.getElementById('modList');
-    listEl.innerHTML = mods.map(m => {
+    const countEl = document.getElementById('resultCount');
+    const emptyEl = document.getElementById('emptyState');
+    
+    listEl.innerHTML = mods.map((m, index) => {
       let displayCat = {Addons: 'مودات', Versions: 'إصدارات ماينكرافت', Skins: 'السكنات', Shaders: 'الشادرات'}[m.category] || m.category;
+      let catColor = {Addons: 'var(--emerald)', Versions: 'var(--diamond)', Skins: 'var(--gold)', Shaders: 'var(--amethyst)'}[m.category];
+      let catInk = {Addons: 'var(--emerald-ink)', Versions: 'var(--diamond-ink)', Skins: 'var(--gold-ink)', Shaders: 'var(--amethyst-ink)'}[m.category];
+      
       return `
-        <div class="mod-card">
-          <div class="mod-thumb"><img src="${m.image}" onerror="this.parentElement.innerHTML='🧩'"></div>
-          <div class="mod-info">
-            <div class="mod-name">${m.name}</div>
-            <div class="mod-cat">${displayCat}</div>
+        <div class="mod-card" style="--i:${index}; --cat-color:${catColor}; --cat-ink:${catInk}">
+          <div class="mod-thumb">
+            <span class="mod-badge">${displayCat}</span>
+            <img src="${m.image}" loading="lazy" onerror="this.parentElement.innerHTML='🧩'">
           </div>
-          <a href="${m.download}" class="dl-btn" target="_blank">تحميل</a>
+          <div class="mod-body">
+            <div class="mod-name">${m.name}</div>
+            <a href="${m.download}" class="dl-btn" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              تحميل
+            </a>
+          </div>
         </div>
       `;
     }).join('');
+    
+    countEl.textContent = mods.length > 0 ? `تم العثور على ${mods.length} عنصر` : "";
+    emptyEl.hidden = mods.length > 0;
   }
 
   function openUpload() { document.getElementById('uploadModal').classList.add('open'); }
+  function closeUpload() { document.getElementById('uploadModal').classList.remove('open'); }
   function submitMod() {
     allMods.unshift({
       name: document.getElementById('modName').value,
@@ -197,7 +597,7 @@
       image: document.getElementById('modImg').value,
       download: document.getElementById('modDl').value
     });
-    document.getElementById('uploadModal').classList.remove('open');
+    closeUpload();
     renderMods(allMods);
   }
 
