@@ -244,7 +244,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
     overflow: hidden;
   }
   .mod-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -260,6 +259,7 @@
     background: var(--cat-color);
     color: var(--cat-ink);
     letter-spacing: .2px;
+    z-index: 2;
   }
 
   .mod-body {
@@ -281,12 +281,12 @@
   .dl-btn {
     margin-top: auto;
     font-family: 'Cairo', sans-serif;
-    background: var(--emerald);
-    color: var(--emerald-ink);
+    background: var(--btn-bg, var(--emerald));
+    color: var(--btn-ink, var(--emerald-ink));
     font-size: 13px;
     font-weight: 700;
     padding: 9px 14px;
-    border: 2px solid #1c8a52;
+    border: 2px solid var(--btn-stroke, var(--emerald-stroke));
     border-radius: var(--r-sm);
     text-decoration: none;
     display: flex;
@@ -473,6 +473,23 @@
 
 <script>
   let allMods = [
+    { name: "PETS Add-On", category: "Addons", image: "https://i.postimg.cc/5tKFZXvW/image-1.jpg", download: "https://direct-link.net/4269460/4lRprbzeRqzr" },
+    { name: "Block Pack Add-On", category: "Addons", image: "https://i.postimg.cc/Dws713Wy/image-1.jpg", download: "https://link-center.net/4269460/GiZcYPOSCbn6" },
+    { name: "Anime Magic Wand", category: "Addons", image: "https://i.postimg.cc/8CZkzBJH/image-1.jpg", download: "https://link-center.net/4269460/WL5uLHlV7dDt" },
+    { name: "Winnie-the-Pooh", category: "Addons", image: "https://i.postimg.cc/fLfC6yJv/image-1.jpg", download: "https://link-center.net/4269460/ZQ3h9d801K9P" },
+    { name: "Multi Block", category: "Addons", image: "https://i.postimg.cc/VLnv1tYF/image-1.jpg", download: "https://link-target.net/4269460/I6f50KkaGrHn" },
+    { name: "Magical Furniture", category: "Addons", image: "https://i.postimg.cc/3NwNYfxG/image-1.jpg", download: "https://link-hub.net/4269460/6IeFHS78qSu5" },
+    { name: "Pyramid City", category: "Addons", image: "https://i.postimg.cc/dQG4yW6b/image-1.jpg", download: "https://link-hub.net/4269460/1Hf6Olidci9h" },
+    { name: "Flame Teens", category: "Skins", image: "https://i.postimg.cc/DZPnWrMv/image-1.jpg", download: "https://link-center.net/4269460/Q777hmL6YbzN" },
+    { name: "Skyblock Mobs", category: "Skins", image: "https://i.postimg.cc/FzYCtm3N/image-1.jpg", download: "https://link-hub.net/4269460/hKXBQJ3m7hCR" },
+    { name: "Candy Kingdom", category: "Skins", image: "https://i.postimg.cc/kX9RhwC9/image-1.jpg", download: "https://link-target.net/4269460/NebRtruAQVRH" },
+    { name: "Rune Spells", category: "Addons", image: "https://i.postimg.cc/6qrptsdp/image-1.jpg", download: "https://link-center.net/4269460/EzuAevVhS1xe" },
+    { name: "SPY CAT", category: "Skins", image: "https://i.postimg.cc/JhHfXNGG/image-1.jpg", download: "https://link-hub.net/4269460/oApT3xmNAHDT" },
+    { name: "Opposite Aliens", category: "Skins", image: "https://i.postimg.cc/1XFXYnCf/image-1.jpg", download: "https://direct-link.net/4269460/HnzX4kx34WsE" },
+    { name: "Negative Teens", category: "Skins", image: "https://i.postimg.cc/VNPryRyH/image-1.jpg", download: "https://link-hub.net/4269460/1rv0rsIB9aNW" },
+    { name: "Cyber Shadows", category: "Skins", image: "https://i.postimg.cc/Y2zxdvFj/image-1.jpg", download: "https://link-hub.net/4269460/VzTvS7dx7YuJ" },
+    { name: "Illusionic", category: "Skins", image: "https://i.postimg.cc/wThYfcVT/image-1.jpg", download: "https://link-center.net/4269460/Jh46WkqRyEFB" },
+    { name: "Soulfire Warriors", category: "Skins", image: "https://i.postimg.cc/xCs3THgC/image-1.jpg", download: "https://direct-link.net/4269460/RVmwQQjH1xSZ" },
     { name: "Sharks N Whales", category: "Skins", image: "https://i.postimg.cc/7ZFKzgg0/image-1.jpg", download: "https://link-hub.net/4269460/ncVOaKYZOM1M" },
     { name: "minecraft-26-31", category: "Versions", image: "https://i.postimg.cc/cJLF0SJv/1000309933.png", download: "https://link-center.net/4269460/SUiaJmpg6OvD" },
     { name: "PARASITE OUTBREAK Add-On 1.0.3", category: "Addons", image: "https://i.postimg.cc/Y0WtCNT3/image-1.jpg", download: "https://devuploads.com/oxpkb5nk162i" },
@@ -566,16 +583,17 @@
       let displayCat = {Addons: 'مودات', Versions: 'إصدارات ماينكرافت', Skins: 'السكنات', Shaders: 'الشادرات'}[m.category] || m.category;
       let catColor = {Addons: 'var(--emerald)', Versions: 'var(--diamond)', Skins: 'var(--gold)', Shaders: 'var(--amethyst)'}[m.category];
       let catInk = {Addons: 'var(--emerald-ink)', Versions: 'var(--diamond-ink)', Skins: 'var(--gold-ink)', Shaders: 'var(--amethyst-ink)'}[m.category];
+      let btnStroke = {Addons: 'var(--emerald-stroke)', Versions: 'var(--diamond-stroke)', Skins: 'var(--gold-stroke)', Shaders: 'var(--amethyst-stroke)'}[m.category];
       
       return `
         <div class="mod-card" style="--i:${index}; --cat-color:${catColor}; --cat-ink:${catInk}">
           <div class="mod-thumb">
             <span class="mod-badge">${displayCat}</span>
-            <img src="${m.image}" loading="lazy" onerror="this.parentElement.innerHTML='🧩'">
+            <img src="${m.image}" loading="lazy" onerror="this.src='https://i.postimg.cc/gJBtt1Cx/pack-icon.png';">
           </div>
           <div class="mod-body">
             <div class="mod-name">${m.name}</div>
-            <a href="${m.download}" class="dl-btn" target="_blank">
+            <a href="${m.download}" class="dl-btn" target="_blank" style="--btn-bg: ${catColor}; --btn-ink: ${catInk}; --btn-stroke: ${btnStroke}">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v13m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
               تحميل
             </a>
