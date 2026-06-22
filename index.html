@@ -24,11 +24,15 @@
   header { background:#090b15; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
   .header-inner { max-width:1280px; margin:0 auto; padding:0 16px; height:60px; display:flex; align-items:center; gap:16px; }
   .logo { font-size:20px; font-weight:800; color:var(--accent); text-decoration:none; }
-  .cats { max-width:1280px; margin:0 auto; padding:12px 24px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--border); }
+  
+  .search-container { max-width:1280px; margin:20px auto; padding:0 24px; }
+  #searchInput { width:100%; padding:12px; border-radius:8px; border:1px solid var(--border); background:var(--bg-card); color:white; font-size:14px; }
+  
+  .cats { max-width:1280px; margin:0 auto; padding:0 24px 12px 24px; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--border); }
   .cat-pill { cursor:pointer; background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:5px 12px; font-size:12px; color:var(--text-sec); }
   .cat-pill.active { border-color:var(--accent); color:var(--accent); background:var(--accent-glow); }
-  .main { max-width:1280px; margin:0 auto; padding:20px 24px; }
   
+  .main { max-width:1280px; margin:0 auto; padding:20px 24px; }
   .mod-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:16px; display:flex; gap:16px; margin-bottom:12px; flex-direction: column; align-items: flex-start; }
   .mod-thumb { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); background:var(--bg-card2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; }
   .mod-thumb img { width:100%; height:100%; object-fit:cover; }
@@ -51,6 +55,10 @@
     <nav style="margin-right:auto;"><a class="admin-only" id="navUploadBtn" onclick="openUpload()" style="cursor:pointer;color:var(--accent)">Upload</a></nav>
   </div>
 </header>
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="ابحث عن مود أو إصدار..." onkeyup="searchMods()">
+</div>
 
 <div class="cats">
   <div class="cat-pill active" onclick="filterMods('All', this)">🧩 الكل</div>
@@ -156,15 +164,18 @@
   function filterMods(cat, el) {
     document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
     el.classList.add('active');
+    renderMods(cat === 'All' ? allMods : allMods.filter(m => m.category === cat));
+  }
+
+  function searchMods() {
+    const filter = document.getElementById('searchInput').value.toLowerCase();
+    renderMods(allMods.filter(m => m.name.toLowerCase().includes(filter)));
+  }
+
+  function renderMods(mods) {
     const listEl = document.getElementById('modList');
-    const filtered = cat === 'All' ? allMods : allMods.filter(m => m.category === cat);
-    listEl.innerHTML = filtered.map(m => {
-      let displayCat = m.category;
-      if (m.category === 'Addons') displayCat = 'مودات';
-      if (m.category === 'Versions') displayCat = 'إصدارات ماينكرافت';
-      if (m.category === 'Skins') displayCat = 'السكنات';
-      if (m.category === 'Shaders') displayCat = 'الشادرات';
-      
+    listEl.innerHTML = mods.map(m => {
+      let displayCat = {Addons: 'مودات', Versions: 'إصدارات ماينكرافت', Skins: 'السكنات', Shaders: 'الشادرات'}[m.category] || m.category;
       return `
         <div class="mod-card">
           <div class="mod-thumb"><img src="${m.image}" onerror="this.parentElement.innerHTML='🧩'"></div>
@@ -187,14 +198,14 @@
       download: document.getElementById('modDl').value
     });
     document.getElementById('uploadModal').classList.remove('open');
-    filterMods('All', document.querySelector('.cat-pill'));
+    renderMods(allMods);
   }
 
   if(new URLSearchParams(window.location.search).get('admin') === 'baybars123') {
     document.getElementById('navUploadBtn').classList.remove('admin-only');
   }
 
-  filterMods('All', document.querySelector('.cat-pill'));
+  renderMods(allMods);
 </script>
 </body>
 </html>
