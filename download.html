@@ -68,9 +68,9 @@
 
 <div class="container">
     <h2>مرحباً بك في موقع بايبارس للتحميل</h2>
-    <p class="status-text" id="status">برجاء الانتظار 10 ثوانٍ لحين تجهيز رابط التحميل...</p>
+    <p class="status-text" id="status">برجاء الانتظار 30 ثانية لحين تجهيز رابط التحميل...</p>
     
-    <div class="countdown" id="timer">10</div>
+    <div class="countdown" id="timer">30</div>
     
     <a href="#" class="btn" id="download-btn">اضغط هنا للانتقال إلى رابط التحميل المباشر</a>
 </div>
@@ -79,7 +79,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const mediafireLink = urlParams.get('url');
 
-    let timeLeft = 10;
+    let timeLeft = 30;
     const timerElement = document.getElementById('timer');
     const statusElement = document.getElementById('status');
     const downloadBtn = document.getElementById('download-btn');
