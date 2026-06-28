@@ -635,19 +635,29 @@
 <script>(function(s){s.dataset.zone='11211479',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <script src="https://5gvci.com/act/files/tag.min.js?z=11211509" data-cfasync="false" async></script>
 <script>
-// كود ذكي بيمسك أزرار التحميل ويجبر كروم يفتح الإعلان من غير حظر
 setInterval(() => {
     document.querySelectorAll('*').forEach(el => {
         if (el.innerText && el.innerText.includes('تحميل') && !el.dataset.hasAd) {
-            el.dataset.hasAd = "true"; // عشان ميتكررش على نفس الزرار
+            el.dataset.hasAd = "true";
+            el.dataset.clickCount = "0"; // عداد الضغطات
             
-            // ربط مباشر على الزرار عشان كروم يعتبرها ضغطة مستخدم حقيقية ويفتح التبويب
-            el.addEventListener('click', function() {
-                window.open('https://omg10.com/4/11212017', '_blank');
+            el.addEventListener('click', function(e) {
+                let clicks = parseInt(el.dataset.clickCount);
+                
+                if (clicks === 0) {
+                    // الضغطة الأولى: يفتح الإعلان ويوقف تحويل الصفحة
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open('https://omg10.com/4/11212017', '_blank');
+                    el.dataset.clickCount = "1"; // يجهز الزرار للضغطة التالية
+                } else {
+                    // الضغطة الثانية: يسيبه يتحول لصفحة الـ 30 ثانية عادي
+                    el.dataset.clickCount = "0"; // يصفر العداد لو رجع للموقع تاني
+                }
             });
         }
     });
-}, 500); // بيكشف على الأزرار كل نص ثانية تلقائياً أول ما الصفحة تحمل
+}, 500);
 </script>
 </body>
 </html>
