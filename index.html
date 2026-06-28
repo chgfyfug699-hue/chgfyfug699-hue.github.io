@@ -635,13 +635,19 @@
 <script>(function(s){s.dataset.zone='11211479',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <script src="https://5gvci.com/act/files/tag.min.js?z=11211509" data-cfasync="false" async></script>
 <script>
-document.addEventListener('click', function(e) {
-    // الكود ده بيراقب الضغطات، لو الزائر ضغط على زرار التحميل بيشغل الإعلان فوراً
-    let downloadButton = e.target.closest('a, button');
-    if (downloadButton && downloadButton.textContent.includes('تحميل')) {
-        window.open('https://omg10.com/4/11212017', '_blank');
-    }
-});
+// كود ذكي بيمسك أزرار التحميل ويجبر كروم يفتح الإعلان من غير حظر
+setInterval(() => {
+    document.querySelectorAll('*').forEach(el => {
+        if (el.innerText && el.innerText.includes('تحميل') && !el.dataset.hasAd) {
+            el.dataset.hasAd = "true"; // عشان ميتكررش على نفس الزرار
+            
+            // ربط مباشر على الزرار عشان كروم يعتبرها ضغطة مستخدم حقيقية ويفتح التبويب
+            el.addEventListener('click', function() {
+                window.open('https://omg10.com/4/11212017', '_blank');
+            });
+        }
+    });
+}, 500); // بيكشف على الأزرار كل نص ثانية تلقائياً أول ما الصفحة تحمل
 </script>
 </body>
 </html>
